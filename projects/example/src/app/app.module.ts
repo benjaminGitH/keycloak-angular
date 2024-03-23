@@ -9,14 +9,16 @@ function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
     keycloak.init({
       config: {
-        realm: 'keycloak-angular-sandbox',
-        url: 'http://localhost:8080',
-        clientId: 'keycloak-angular'
+        realm: 'soappro',
+        url: 'http://localhost:8091',
+        clientId: 'soappro-mobile-application-id',
       },
       initOptions: {
-        onLoad: 'check-sso',
+        onLoad: 'login-required',
+        checkLoginIframe: false,
+        pkceMethod: 'S256',
         silentCheckSsoRedirectUri:
-          window.location.origin + '/assets/silent-check-sso.html'
+          window.location.origin + '/callback'
       }
     });
 }
